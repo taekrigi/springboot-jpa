@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.my.jpa.entity.UserEntity;
+import com.my.jpa.model.PassportModel;
 import com.my.jpa.model.UserModel;
 import com.my.jpa.param.UserParam;
 
