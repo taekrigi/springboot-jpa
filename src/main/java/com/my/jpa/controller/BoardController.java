@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.my.jpa.model.BoardModel;
+import com.my.jpa.model.CommentModel;
 import com.my.jpa.param.BoardParam;
+import com.my.jpa.param.CommentParam;
 import com.my.jpa.service.board.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -55,5 +57,27 @@ public class BoardController {
 	public BoardModel deleteBoard(@PathVariable("id") Long id) {
 		return boardService.deleteBoard(id);
 	}
-
+	
+	@GetMapping("{boardId}/comments")
+	public List<CommentModel> getCommentsInBoard(@PathVariable("boardId") Long boardId) {
+		return boardService.getCommentsInBoard(boardId);
+	}
+	
+	@PostMapping("{boardId}/comment")
+	public CommentModel addCommentInBoard(@PathVariable("boardId") Long boardId, @Valid @RequestBody CommentParam commentParam) {
+		return boardService.addCommentInBoard(boardId, commentParam);
+	}
+	
+	@PutMapping("{boardId}/comment/{commentId}")
+	public CommentModel updateCommentInBoard(@PathVariable("boardId") Long boardId, 
+											 @PathVariable("commentId") Long commentId,
+ 											 @Valid @RequestBody CommentParam commentParam) {
+		return boardService.updateCommentInBoard(boardId, commentId, commentParam);
+	}
+	
+	@DeleteMapping("{boardId}/comment/{commentId}")
+	public CommentModel deleteCommentInBoard(@PathVariable("boardId") Long boardId, @PathVariable("commentId") Long commentId) {
+		return boardService.deleteCommentInBoard(boardId, commentId);
+	}
+	
 }
