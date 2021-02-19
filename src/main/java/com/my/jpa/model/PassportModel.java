@@ -7,14 +7,14 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UserModel {
+public class PassportModel {
 
 	private UUID id;
 	
-	private String userId;
+	private String country;
 	
-	private String userPassword;
-		
-	private PassportModel passport;
+	private String gender;
+	
+	private int countVisitedCountry;
 	
 }

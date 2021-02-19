@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.my.jpa.model.PassportModel;
 import com.my.jpa.model.UserModel;
+import com.my.jpa.param.PassportParam;
 import com.my.jpa.param.UserParam;
 import com.my.jpa.service.board.UserService;
 
@@ -40,11 +42,23 @@ public class UserController {
 		return userService.getUser(id);
 	}
 	
+	@GetMapping("/userId/{userId}")
+	public UserModel getUserByUserId(@PathVariable("userId") String userId) {
+		return userService.getUserByUserId(userId);
+	}
+	
 	@PostMapping
 	public ResponseEntity<UserModel> addUser(@Valid @RequestBody UserParam userParam) throws URISyntaxException {
 		UserModel userModel = userService.addUser(userParam);
 		return ResponseEntity.created(new URI("/user/" + userModel.getUserId()))
 				.body(userModel);
+	}
+
+	@PostMapping("{id}/passport")
+	public ResponseEntity<PassportModel> addPassportInUser(@PathVariable("id") UUID id, @RequestBody PassportParam passportParam) throws URISyntaxException {
+		PassportModel passportModel = userService.addPassportInUser(id, passportParam);
+		return ResponseEntity.created(new URI("/user/" + id + "/passport/" + passportModel.getId()))
+				.body(passportModel);
 	}
 	
 	@PutMapping("{id}")
@@ -52,10 +66,19 @@ public class UserController {
 		return userService.updateUser(id, userParam);
 	}
 	
+	@PutMapping("/userId/{userId}")
+	public UserModel updateUserByUserId(@PathVariable("userId") String userId, @Valid @RequestBody UserParam userParam) {
+		return userService.updateUserByUserId(userId, userParam);
+	}
+	
 	@DeleteMapping("{id}")
 	public UserModel deleteUser(@PathVariable("id") UUID id) {
 		return userService.deleteUser(id);
 	}
 	
+	@DeleteMapping("/userId/{userId}")
+	public UserModel deleteUserByUserId(@PathVariable("userId") String userId) {
+		return userService.deleteUserByUserId(userId);
+	}
 	
 }

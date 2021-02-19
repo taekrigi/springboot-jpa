@@ -34,7 +34,7 @@ public class PassportEntity {
 	private String gender;
 	
 	@Column
-	private int visitedCountry;
+	private int countVisitedCountry;
 	
 	@OneToOne(mappedBy = "passport")
 	private UserEntity user;

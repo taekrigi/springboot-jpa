@@ -41,6 +41,11 @@ public class BoardController {
 		return boardService.getBoard(id);
 	}
 	
+	@GetMapping("{boardId}/comments")
+	public List<CommentModel> getCommentsInBoard(@PathVariable("boardId") Long boardId) {
+		return boardService.getCommentsInBoard(boardId);
+	}
+	
 	@PostMapping
 	public ResponseEntity<BoardModel> addBoard(@Valid @RequestBody BoardParam boardParam) throws URISyntaxException {
 		BoardModel boardModel = boardService.addBoard(boardParam);
@@ -48,24 +53,14 @@ public class BoardController {
 				.body(boardModel);
 	}
 	
-	@PutMapping("{id}")
-	public BoardModel updateBoard(@PathVariable("id") Long id, @Valid @RequestBody BoardParam boardParam) {
-		return boardService.updateBoard(id, boardParam);
-	}
-	
-	@DeleteMapping("{id}")
-	public BoardModel deleteBoard(@PathVariable("id") Long id) {
-		return boardService.deleteBoard(id);
-	}
-	
-	@GetMapping("{boardId}/comments")
-	public List<CommentModel> getCommentsInBoard(@PathVariable("boardId") Long boardId) {
-		return boardService.getCommentsInBoard(boardId);
-	}
-	
 	@PostMapping("{boardId}/comment")
 	public CommentModel addCommentInBoard(@PathVariable("boardId") Long boardId, @Valid @RequestBody CommentParam commentParam) {
 		return boardService.addCommentInBoard(boardId, commentParam);
+	}
+	
+	@PutMapping("{id}")
+	public BoardModel updateBoard(@PathVariable("id") Long id, @Valid @RequestBody BoardParam boardParam) {
+		return boardService.updateBoard(id, boardParam);
 	}
 	
 	@PutMapping("{boardId}/comment/{commentId}")
@@ -73,6 +68,11 @@ public class BoardController {
 											 @PathVariable("commentId") Long commentId,
  											 @Valid @RequestBody CommentParam commentParam) {
 		return boardService.updateCommentInBoard(boardId, commentId, commentParam);
+	}
+	
+	@DeleteMapping("{id}")
+	public BoardModel deleteBoard(@PathVariable("id") Long id) {
+		return boardService.deleteBoard(id);
 	}
 	
 	@DeleteMapping("{boardId}/comment/{commentId}")

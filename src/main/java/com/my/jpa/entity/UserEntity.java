@@ -2,6 +2,7 @@ package com.my.jpa.entity;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,10 +35,14 @@ public class UserEntity {
 	@Column
 	private String userPassword;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private PassportEntity passport;
 	
 	public void setPassword(String userPassword) {
 		this.userPassword = userPassword;	
 	}	
+	
+	public void setPassport(PassportEntity passport) {
+		this.passport = passport;
+	}
 }
