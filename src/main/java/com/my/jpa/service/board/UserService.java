@@ -46,7 +46,6 @@ public class UserService {
 	}
 
 	public UserModel getUser(UUID id) {
-		System.out.println(findUserById(id).getPassport().getCountry());
 		return userMapper.toModel(findUserById(id));
 	}
 	
@@ -103,11 +102,10 @@ public class UserService {
 
 	@Async
 	public CompletableFuture<List<UserModel>> addUsersByCsv(MultipartFile file) throws IOException {
-		System.out.println("what the...?");
 		long start = System.currentTimeMillis();
 		
 		List<UserEntity> users = parseCsvToUserEntity(file);
-		System.out.println(users);
+
 		logger.info("Saving list of users of size {}, {}", users.size(), Thread.currentThread().getName());
 		
 		userRepository.saveAll(users);
