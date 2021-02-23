@@ -18,7 +18,7 @@
 		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
          <maven.compiler.source>13</maven.compiler.source>
          <maven.compiler.target>13</maven.compiler.target>
-         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
          <org.projectlombok.version>1.18.16</org.projectlombok.version>
 	</properties>
 	<dependencies>
@@ -113,11 +113,6 @@
                     <source>13</source>
                     <target>13</target>
                     <annotationProcessorPaths>
-			             <path>
-                             <groupId>org.mapstruct</groupId>
-                             <artifactId>mapstruct-processor</artifactId>
-                             <version>${org.mapstruct.version}</version>
-                         </path>
                          <path>
                              <groupId>org.projectlombok</groupId>
                              <artifactId>lombok</artifactId>
@@ -128,12 +123,12 @@
                              <artifactId>lombok-mapstruct-binding</artifactId>
                              <version>${lombok-mapstruct-binding.version}</version>
                           </path>
-		        </annotationProcessorPaths>
-		        <compilerArgs>
-	                <compilerArg>
-	                       -Amapstruct.defaultComponentModel=spring
-	                </compilerArg>
-           		 </compilerArgs>
+		        	</annotationProcessorPaths>
+			        <compilerArgs>
+		                <compilerArg>
+		                       -Amapstruct.defaultComponentModel=spring
+		                </compilerArg>
+           			</compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
